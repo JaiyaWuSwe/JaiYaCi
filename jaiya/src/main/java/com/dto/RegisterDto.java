@@ -8,6 +8,7 @@ public class RegisterDto {
 	String email;
 	String tell;
 	String _id;
+	int status;
 	public ObjectId getId() {
 		return new ObjectId(_id);
 	}
@@ -37,5 +38,11 @@ public class RegisterDto {
 	}
 	public void setTell(String tell) {
 		this.tell = tell;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

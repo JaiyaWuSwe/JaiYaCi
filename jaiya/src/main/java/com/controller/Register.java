@@ -8,9 +8,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bson.Document;
+import org.bson.codecs.Decoder;
 import org.modelmapper.ModelMapper;
 
 import com.connect.mongo.Connect;
+import com.dao.RegisterDao;
 import com.dto.RegisterDto;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -46,8 +48,9 @@ public class Register {
 			message.addProperty("message", false);
 			
 		} catch (Exception e) {
-			message.addProperty("message", true);
+//			message.addProperty("message", true);
 			String json = gson.toJson(RegisterDto);
+			RegisterDto.setStatus(2);
 			Document document = Document.parse(json);
 			
 			try {
