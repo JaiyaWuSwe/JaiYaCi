@@ -22,9 +22,9 @@ import com.mongodb.client.MongoCollection;
 public class Login {
 	
 	@POST
-	@Path("/insert")
+	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(LoginDto LoginDto) {
+	public Response login(LoginDto LoginDto) {
 		// import mongodb
 		Connect mongo = new Connect();
 		MongoCollection<Document> collection = mongo.db.getCollection("user");

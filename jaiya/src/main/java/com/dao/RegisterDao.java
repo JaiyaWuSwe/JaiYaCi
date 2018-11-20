@@ -5,6 +5,7 @@ public class RegisterDao {
 	String password;
 	String email;
 	String tell;
+	int status;
 	public String getUsername() {
 		return username;
 	}
@@ -28,5 +29,11 @@ public class RegisterDao {
 	}
 	public void setTell(String tell) {
 		this.tell = tell;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

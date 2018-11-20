@@ -49,8 +49,8 @@ public class Register {
 			
 		} catch (Exception e) {
 //			message.addProperty("message", true);
-			String json = gson.toJson(RegisterDto);
 			RegisterDto.setStatus(2);
+			String json = gson.toJson(RegisterDto);
 			Document document = Document.parse(json);
 			
 			try {
