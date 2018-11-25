@@ -12,6 +12,13 @@ public class UserDataDto {
 	String bloodType;
 	String _id;
 	String gender;
+	String userId;
+	public ObjectId getuserId() {
+		return new ObjectId(userId);
+	}
+	public void setuserId(String userId) {
+		this.userId =userId;
+	}
 	public ObjectId getId() {
 		return new ObjectId(_id);
 	}
