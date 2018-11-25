@@ -8,6 +8,7 @@ public class UserDataDao {
 	String disease;
 	String machineName;
 	String bloodType;
+	String gender;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -49,6 +50,12 @@ public class UserDataDao {
 	}
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }

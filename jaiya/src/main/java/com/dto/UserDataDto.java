@@ -11,6 +11,7 @@ public class UserDataDto {
 	String machineName;
 	String bloodType;
 	String _id;
+	String gender;
 	public ObjectId getId() {
 		return new ObjectId(_id);
 	}
@@ -58,6 +59,12 @@ public class UserDataDto {
 	}
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }
