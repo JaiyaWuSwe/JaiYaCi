@@ -1,0 +1,63 @@
+package com.dto;
+
+import org.bson.types.ObjectId;
+
+public class UserDataDto {
+	String firstName;
+	String lastName;
+	String date;
+	String drung;
+	String disease;
+	String machineName;
+	String bloodType;
+	String _id;
+	public ObjectId getId() {
+		return new ObjectId(_id);
+	}
+	public void setId(String _id) {
+		this._id = _id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getDrung() {
+		return drung;
+	}
+	public void setDrung(String drung) {
+		this.drung = drung;
+	}
+	public String getDisease() {
+		return disease;
+	}
+	public void setDisease(String disease) {
+		this.disease = disease;
+	}
+	public String getMachineName() {
+		return machineName;
+	}
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+	public String getBloodType() {
+		return bloodType;
+	}
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
+	}
+	
+}
