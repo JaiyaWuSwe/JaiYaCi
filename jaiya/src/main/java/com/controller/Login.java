@@ -24,7 +24,7 @@ public class Login {
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response login(LoginDto LoginDto) {
+	public Response login(RegisterDto RegisterDto) {
 		// import mongodb
 		Connect mongo = new Connect();
 		MongoCollection<Document> collection = mongo.db.getCollection("user");
@@ -32,13 +32,13 @@ public class Login {
 		Gson gson = new Gson();
 		ModelMapper Mapper = new ModelMapper();	
 		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("username", LoginDto.getUsername());
-		searchQuery.put("password", LoginDto.getPassword());
+		searchQuery.put("username", RegisterDto.getUsername());
+		searchQuery.put("password", RegisterDto.getPassword());
 		
-		LoginDto value = new LoginDto();
+		RegisterDto value = new RegisterDto();
 		try {
 			FindIterable<Document> data = collection.find(searchQuery);
-			value = Mapper.map(data.first(), LoginDto.class);
+			value = Mapper.map(data.first(), RegisterDto.class);
 			message.addProperty("message", true);
 		}catch (Exception e) {
 			message.addProperty("message", false);
