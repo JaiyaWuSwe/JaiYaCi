@@ -5,7 +5,14 @@ public class RegisterDao {
 	String password;
 	String email;
 	String tell;
-	int status;
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	String status;
+	String role;
 	public String getUsername() {
 		return username;
 	}
@@ -30,10 +37,10 @@ public class RegisterDao {
 	public void setTell(String tell) {
 		this.tell = tell;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 }

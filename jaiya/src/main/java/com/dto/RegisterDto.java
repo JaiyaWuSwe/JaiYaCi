@@ -8,7 +8,15 @@ public class RegisterDto {
 	String email;
 	String tell;
 	String _id;
-	int status;
+	String role;
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	String status;
 	public ObjectId getId() {
 		return new ObjectId(_id);
 	}
@@ -39,10 +47,10 @@ public class RegisterDto {
 	public void setTell(String tell) {
 		this.tell = tell;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 }
