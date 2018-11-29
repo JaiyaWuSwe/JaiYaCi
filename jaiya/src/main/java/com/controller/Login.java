@@ -10,7 +10,6 @@ import org.bson.Document;
 import org.modelmapper.ModelMapper;
 
 import com.connect.mongo.Connect;
-import com.dto.LoginDto;
 import com.dto.RegisterDto;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

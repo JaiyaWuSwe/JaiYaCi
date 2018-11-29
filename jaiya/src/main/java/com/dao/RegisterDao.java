@@ -1,18 +1,22 @@
 package com.dao;
 
+import org.bson.types.ObjectId;
+
 public class RegisterDao {
 	String username;
 	String password;
 	String email;
 	String tell;
+	String status;
+	String role;
+	String _id;
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
 	}
-	String status;
-	String role;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -43,4 +47,11 @@ public class RegisterDao {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String get_id() {
+		return _id;
+	}
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+	
 }
