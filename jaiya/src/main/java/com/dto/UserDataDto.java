@@ -13,11 +13,12 @@ public class UserDataDto {
 	String _id;
 	String gender;
 	String userId;
-	public ObjectId getuserId() {
-		return new ObjectId(userId);
+	
+	public String getUserId() {
+		return userId;
 	}
-	public void setuserId(String userId) {
-		this.userId =userId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public ObjectId getId() {
 		return new ObjectId(_id);

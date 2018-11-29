@@ -60,7 +60,7 @@ public class UserData {
 		ModelMapper Mapper = new ModelMapper();
 		
 		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("userId", userDataDto.getuserId());
+		searchQuery.put("userId", userDataDto.getUserId());
 		
 		UserDataDto value = new UserDataDto();
 		try {
