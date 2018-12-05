@@ -10,7 +10,10 @@ import org.bson.Document;
 import org.modelmapper.ModelMapper;
 
 import com.connect.mongo.Connect;
+import com.dao.TimeToGetPillowDao;
+import com.dao.UserDataDao;
 import com.dto.RegisterDto;
+import com.dto.TimeToGetPillowDto;
 import com.dto.UserDataDto;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -71,6 +74,43 @@ public class UserData {
 //			message.addProperty("message", false);
 		}finally {
 			message.add("data", gson.toJsonTree(value));
+		}
+		
+		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
+	}
+	
+	@POST
+	@Path("/update")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response update(UserDataDto userDataDto) {
+		Connect mongo = new Connect();
+		JsonObject message = new JsonObject();
+		Gson gson = new Gson();
+		MongoCollection<Document> collection = mongo.db.getCollection("userData");
+		
+		UserDataDao userDataDao = new UserDataDao();
+//
+		
+//		ReisterDao.setId(RegisterDto.getId());
+		userDataDao.setDisease(userDataDao.getDisease());
+		userDataDao.setDrung(userDataDao.getDrung());
+		
+		
+		
+		String json = gson.toJson(userDataDao);
+		Document document = Document.parse(json);
+		
+		BasicDBObject setQuery = new BasicDBObject();
+        setQuery.put("$set", document);
+		
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("_id", userDataDao.get_id());
+		
+		try {
+			collection.updateOne(searchQuery, setQuery);
+			message.addProperty("message", true);
+		}catch (Exception e) {
+			message.addProperty("message", false);
 		}
 		
 		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();

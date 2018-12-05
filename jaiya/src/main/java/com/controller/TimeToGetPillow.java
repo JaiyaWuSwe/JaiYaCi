@@ -48,6 +48,7 @@ public class TimeToGetPillow {
 			
 		} catch (Exception e) {
 //			message.addProperty("message", true);
+			TimeToGetPillowDto.setStatus_alert(1);
 			TimeToGetPillowDto.setStatus(1);
 			String json = gson.toJson(TimeToGetPillowDto);
 			Document document = Document.parse(json);
