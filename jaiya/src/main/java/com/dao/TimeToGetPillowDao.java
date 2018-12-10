@@ -3,7 +3,7 @@ package com.dao;
 public class TimeToGetPillowDao {
 	String time;
 	String drug;
-	int among;
+	int amount;
 	String volume;
 	String duration;
 	int alert;
@@ -30,11 +30,12 @@ public class TimeToGetPillowDao {
 	public void setDrug(String drug) {
 		this.drug = drug;
 	}
-	public int getAmong() {
-		return among;
+	
+	public int getAmount() {
+		return amount;
 	}
-	public void setAmong(int among) {
-		this.among = among;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	public String getVolume() {
 		return volume;
