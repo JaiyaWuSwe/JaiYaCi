@@ -11,6 +11,12 @@ public class UserDataDto {
 	String machineName;
 	String bloodType;
 	String _id;
+	public String get_id() {
+		return _id;
+	}
+	public void set_id(String _id) {
+		this._id = _id;
+	}
 	String gender;
 	String userId;
 	
@@ -20,12 +26,7 @@ public class UserDataDto {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public ObjectId getId() {
-		return new ObjectId(_id);
-	}
-	public void setId(String _id) {
-		this._id = _id;
-	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
