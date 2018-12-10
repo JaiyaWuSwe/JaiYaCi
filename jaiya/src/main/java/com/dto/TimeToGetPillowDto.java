@@ -4,7 +4,7 @@ import org.bson.types.ObjectId;
 
 public class TimeToGetPillowDto {
 	String time;
-	String drung;
+	String drug;
 	int among;
 	String volume;
 	String duration;
@@ -25,11 +25,12 @@ public class TimeToGetPillowDto {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public String getDrung() {
-		return drung;
+	
+	public String getDrug() {
+		return drug;
 	}
-	public void setDrung(String drung) {
-		this.drung = drung;
+	public void setDrug(String drug) {
+		this.drug = drug;
 	}
 	public int getAmong() {
 		return among;

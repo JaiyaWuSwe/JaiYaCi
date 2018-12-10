@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import com.connect.mongo.Connect;
 import com.dao.TimeToGetPillowDao;
 import com.dto.TimeToGetPillowDto;
+import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mongodb.BasicDBObject;
@@ -151,6 +152,45 @@ public class TimeToGetPillow {
 			message.addProperty("message", true);
 		}catch (Exception e) {
 			message.addProperty("message", false);
+		}
+		
+		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
+	}
+	
+	@POST
+	@Path("/showtimetogetpillow")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response showtimtogetpillow(TimeToGetPillowDto TimeToGetPillowDto) {
+		Connect mongo = new Connect();
+		MongoCollection<Document> collection = mongo.db.getCollection("timetogetpillow");
+		
+		//import json , modelmapper
+		JsonObject message = new JsonObject();
+		Gson gson = new Gson();
+		ModelMapper Mapper = new ModelMapper();
+		
+		BasicDBObject searchQuery =new BasicDBObject();
+		searchQuery.put("time", TimeToGetPillowDto.getUserId());
+		searchQuery.put("status",TimeToGetPillowDto.getStatus());
+		
+		TimeToGetPillowDto[] value = null;
+		
+		
+	
+
+		try {
+			FindIterable<Document> data = collection.find(searchQuery);
+			int size = Iterables.size(data);
+			value = new TimeToGetPillowDto[size];
+			int key = 0;
+			for (Document document : data) {
+				value[key++] = Mapper.map(document, TimeToGetPillowDto.class);
+			}
+			message.addProperty("message", true);
+		}catch (Exception e) {
+			message.addProperty("message", false);
+		}finally {
+			message.add("data", gson.toJsonTree(value));
 		}
 		
 		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
