@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 
 import com.connect.mongo.Connect;
@@ -92,9 +93,9 @@ public class UserData {
 //
 		
 //		ReisterDao.setId(RegisterDto.getId());
-		userDataDao.setDisease(userDataDao.getDisease());
-		userDataDao.setDrung(userDataDao.getDrung());
-		
+		userDataDao.setDisease(userDataDto.getDisease());
+		userDataDao.setDrung(userDataDto.getDrung());
+		System.out.println(userDataDto.getDisease());
 		
 		
 		String json = gson.toJson(userDataDao);
@@ -102,9 +103,12 @@ public class UserData {
 		
 		BasicDBObject setQuery = new BasicDBObject();
         setQuery.put("$set", document);
-		
+        
+        
 		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("_id", userDataDao.get_id());
+		String _id = userDataDto.get_id();
+		ObjectId id = new ObjectId(_id);
+		searchQuery.put("_id", id);
 		
 		try {
 			collection.updateOne(searchQuery, setQuery);

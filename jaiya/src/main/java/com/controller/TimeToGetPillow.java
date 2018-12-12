@@ -170,7 +170,7 @@ public class TimeToGetPillow {
 		ModelMapper Mapper = new ModelMapper();
 		
 		BasicDBObject searchQuery =new BasicDBObject();
-		searchQuery.put("time", TimeToGetPillowDto.getUserId());
+		searchQuery.put("userId", TimeToGetPillowDto.getUserId());
 		searchQuery.put("status",TimeToGetPillowDto.getStatus());
 		
 		TimeToGetPillowDto[] value = null;
@@ -208,8 +208,7 @@ public class TimeToGetPillow {
 		ModelMapper Mapper = new ModelMapper();
 		
 		BasicDBObject searchQuery =new BasicDBObject();
-		searchQuery.put("time", TimeToGetPillowDto.getUserId());
-		searchQuery.put("status",TimeToGetPillowDto.getStatus());
+		searchQuery.put("userId", TimeToGetPillowDto.getUserId());
 		
 		TimeToGetPillowDto[] value = null;
 		
