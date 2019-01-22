@@ -1,5 +1,7 @@
 package com.dao;
 
+import org.bson.types.ObjectId;
+
 public class TimeToGetPillowDao {
 	String time;
 	String drug;
@@ -12,11 +14,11 @@ public class TimeToGetPillowDao {
 	String userId;
 	String _id;
 	
+	public void setId(String id) {
+		this._id = _id;
+	}
 	public String get_id() {
 		return _id;
-	}
-	public void set_id(String _id) {
-		this._id = _id;
 	}
 	public String getTime() {
 		return time;

@@ -2,16 +2,20 @@ package com.controller;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 
 import com.connect.mongo.Connect;
 import com.dao.TimeToGetPillowDao;
+import com.dto.Test;
 import com.dto.TimeToGetPillowDto;
 import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
@@ -36,8 +40,9 @@ public class TimeToGetPillow {
 		Gson gson = new Gson();
 		ModelMapper Mapper = new ModelMapper();
 		
-		BasicDBObject searchQuery =new BasicDBObject();
+		BasicDBObject searchQuery = new BasicDBObject();
 		searchQuery.put("time", TimeToGetPillowDto.getTime());
+		searchQuery.put("status",3);
 		
 		TimeToGetPillowDto timeToGetPillowDto = new TimeToGetPillowDto();
 		
@@ -102,17 +107,20 @@ public class TimeToGetPillow {
 		
 		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
 	}
-	@DELETE
+	@POST
+//	@Path("/delete?id={id}")
 	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response delete(TimeToGetPillowDao TimeToGetPillowDao) {
+//	public Response delete(@PathParam("id") String id) {
+	public Response delete(Test test) {
 		Connect mongo = new Connect();
 		JsonObject message = new JsonObject();
 		Gson gson = new Gson();
 		MongoCollection<Document> collection = mongo.db.getCollection("timetogetpillow");
 		
+		
 		try {
-			collection.deleteOne(Filters.eq("_id", TimeToGetPillowDao.get_id())); 
+			collection.deleteOne(Filters.eq("_id", new ObjectId(test.getId()))); 
 			message.addProperty("message", true);
 		}catch (Exception e) {
 			message.addProperty("message", false);
@@ -158,26 +166,20 @@ public class TimeToGetPillow {
 	}
 	
 	@POST
-	@Path("/showtimetogetpillow")
+	@Path("/history")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response showtimtogetpillow(TimeToGetPillowDto TimeToGetPillowDto) {
+	public Response history(TimeToGetPillowDto TimeToGetPillowDto) {
 		Connect mongo = new Connect();
 		MongoCollection<Document> collection = mongo.db.getCollection("timetogetpillow");
 		
 		//import json , modelmapper
 		JsonObject message = new JsonObject();
 		Gson gson = new Gson();
-		ModelMapper Mapper = new ModelMapper();
-		
+		ModelMapper Mapper = new ModelMapper();	
 		BasicDBObject searchQuery =new BasicDBObject();
 		searchQuery.put("userId", TimeToGetPillowDto.getUserId());
-		searchQuery.put("status",TimeToGetPillowDto.getStatus());
-		
+		searchQuery.put("status",2);	
 		TimeToGetPillowDto[] value = null;
-		
-		
-	
-
 		try {
 			FindIterable<Document> data = collection.find(searchQuery);
 			int size = Iterables.size(data);
@@ -206,15 +208,10 @@ public class TimeToGetPillow {
 		JsonObject message = new JsonObject();
 		Gson gson = new Gson();
 		ModelMapper Mapper = new ModelMapper();
-		
 		BasicDBObject searchQuery =new BasicDBObject();
-		searchQuery.put("userId", TimeToGetPillowDto.getUserId());
-		
+		searchQuery.put("userId", TimeToGetPillowDto.getUserId());	
+		searchQuery.put("status",1);
 		TimeToGetPillowDto[] value = null;
-		
-		
-	
-
 		try {
 			FindIterable<Document> data = collection.find(searchQuery);
 			int size = Iterables.size(data);
@@ -228,6 +225,50 @@ public class TimeToGetPillow {
 			message.addProperty("message", false);
 		}finally {
 			message.add("data", gson.toJsonTree(value));
+		}
+		
+		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
+	}
+	@POST
+	@Path("/changestatus")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response changestatus(TimeToGetPillowDto TimeToGetPillowDto) {
+		Connect mongo = new Connect();
+		JsonObject message = new JsonObject();
+		Gson gson = new Gson();
+		MongoCollection<Document> collection = mongo.db.getCollection("timetogetpillow");
+		
+		TimeToGetPillowDao timeToGetPillowDao = new TimeToGetPillowDao();
+
+		timeToGetPillowDao.setStatus(TimeToGetPillowDto.getStatus());
+		
+		
+		String json = gson.toJson(timeToGetPillowDao);
+		Document document = Document.parse(json);
+		
+		BasicDBObject setQuery = new BasicDBObject();
+        setQuery.put("$set", document);
+        
+        System.out.println(document);
+       
+
+		BasicDBObject searchQuery = new BasicDBObject();
+		
+		searchQuery.put("userId", TimeToGetPillowDto.getUserId());
+		System.out.println(TimeToGetPillowDto.getUserId());
+		
+		
+		
+		String _id = TimeToGetPillowDto.get_id();
+//		System.out.println(timeToGetPillowDao.get_id());
+		ObjectId id = new ObjectId(_id);
+		searchQuery.put("_id", id);
+//		System.out.println(id);
+		try {
+			collection.updateOne(searchQuery, setQuery);
+			message.addProperty("message", true);
+		}catch (Exception e) {
+			message.addProperty("message", false);
 		}
 		
 		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();

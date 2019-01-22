@@ -11,13 +11,14 @@ public class UserDataDto {
 	String machineName;
 	String bloodType;
 	String _id;
-	String id;
-	public ObjectId getId() {
-		return new ObjectId(id);
-	}
-	public void setId(String id) {
-		this.id = _id;
-	}
+
+//	String id;
+//	public ObjectId getId() {
+//		return new ObjectId(id);
+//	}
+//	public void setId(String id) {
+//		this.id = _id;
+//	}
 	public String get_id() {
 		return _id;
 	}
