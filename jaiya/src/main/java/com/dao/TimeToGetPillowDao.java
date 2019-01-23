@@ -13,7 +13,14 @@ public class TimeToGetPillowDao {
 	int status;
 	String userId;
 	String _id;
+	String alertid;
 	
+	public String getAlertid() {
+		return alertid;
+	}
+	public void setAlertid(String alertid) {
+		this.alertid = alertid;
+	}
 	public void setId(String id) {
 		this._id = _id;
 	}

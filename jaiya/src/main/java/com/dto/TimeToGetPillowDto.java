@@ -14,6 +14,13 @@ public class TimeToGetPillowDto {
 	String userId;
 	String _id;
 	String id;
+	String alertid;
+	public String getAlertid() {
+		return alertid;
+	}
+	public void setAlertid(String alertid) {
+		this.alertid = alertid;
+	}
 	public ObjectId getId() {
 		return new ObjectId(id);
 	}
