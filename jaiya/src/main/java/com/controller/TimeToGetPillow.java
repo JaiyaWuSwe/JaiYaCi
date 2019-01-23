@@ -15,7 +15,7 @@ import org.modelmapper.ModelMapper;
 
 import com.connect.mongo.Connect;
 import com.dao.TimeToGetPillowDao;
-import com.dto.Test;
+//import com.dto.Test;
 import com.dto.TimeToGetPillowDto;
 import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
@@ -107,27 +107,27 @@ public class TimeToGetPillow {
 		
 		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
 	}
-	@POST
-//	@Path("/delete?id={id}")
-	@Path("/delete")
-	@Consumes(MediaType.APPLICATION_JSON)
-//	public Response delete(@PathParam("id") String id) {
-	public Response delete(Test test) {
-		Connect mongo = new Connect();
-		JsonObject message = new JsonObject();
-		Gson gson = new Gson();
-		MongoCollection<Document> collection = mongo.db.getCollection("timetogetpillow");
-		
-		
-		try {
-			collection.deleteOne(Filters.eq("_id", new ObjectId(test.getId()))); 
-			message.addProperty("message", true);
-		}catch (Exception e) {
-			message.addProperty("message", false);
-		}
-		
-		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
-	}
+//	@POST
+////	@Path("/delete?id={id}")
+//	@Path("/delete")
+//	@Consumes(MediaType.APPLICATION_JSON)
+////	public Response delete(@PathParam("id") String id) {
+//	public Response delete(Test test) {
+//		Connect mongo = new Connect();
+//		JsonObject message = new JsonObject();
+//		Gson gson = new Gson();
+//		MongoCollection<Document> collection = mongo.db.getCollection("timetogetpillow");
+//		
+//		
+//		try {
+//			collection.deleteOne(Filters.eq("_id", new ObjectId(test.getId()))); 
+//			message.addProperty("message", true);
+//		}catch (Exception e) {
+//			message.addProperty("message", false);
+//		}
+//		
+//		return Response.ok(gson.toJson(message), MediaType.APPLICATION_JSON).build();
+//	}
 	
 	@POST
 	@Path("/changeAlert")
