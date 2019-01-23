@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import com.connect.mongo.Connect;
 import com.dto.FindMachineDto;
 import com.dto.TimeToGetPillowDto;
+import com.dto.UserDataDto;
 import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -70,16 +71,14 @@ public class FindMachine {
 		ModelMapper Mapper = new ModelMapper();
 		BasicDBObject searchQuery =new BasicDBObject();
 		searchQuery.put("name", FindMachineDto.getName());	
-		FindMachineDto[] value = null;
+		FindMachineDto value = new FindMachineDto();
 		try {
 			FindIterable<Document> data = collection.find(searchQuery);
-			int size = Iterables.size(data);
-			value = new FindMachineDto[size];
-			int key = 0;
-			for (Document document : data) {
-				value[key++] = Mapper.map(document, FindMachineDto.class);
-			}
+			value = Mapper.map(data.first(), FindMachineDto.class);
 			message.addProperty("message", true);
+			
+			
+			
 		}catch (Exception e) {
 			message.addProperty("message", false);
 		}finally {
