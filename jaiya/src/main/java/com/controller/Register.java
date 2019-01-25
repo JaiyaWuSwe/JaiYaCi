@@ -50,7 +50,7 @@ public class Register {
 		} catch (Exception e) {
 //			message.addProperty("message", true);
 			RegisterDto.setStatus("1");
-			RegisterDto.setRole("1");
+			RegisterDto.setRole("2");
 			String json = gson.toJson(RegisterDto);
 			Document document = Document.parse(json);
 			
